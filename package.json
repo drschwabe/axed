@@ -1,6 +1,6 @@
 {
   "name": "axed",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "utility lib for abstracting and handling axios requests and errors with less code",
   "source": "lib.js",
   "dependencies": {
@@ -11,7 +11,13 @@
     "parcel": "^2.6.2"
   }, 
   "module": "dist/lib.mjs",
+  "targets": {
+    "module": {
+      "includeNodeModules": true
+    }
+  }, 
   "scripts" : {
-    "parcel": "npx parcel build" 
+    "parcel": "npx parcel build",  
+    "postinstall" : "npm run parcel" 
   }
 }
