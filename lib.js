@@ -1,5 +1,5 @@
 const { log } = console
-const {  find, isError } = require('lodash')
+const {  find, isError, isUndefined } = require('lodash')
 const axios = require('axios') 
 
 const axed = {
