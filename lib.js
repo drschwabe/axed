@@ -1,5 +1,5 @@
 const { log } = console
-const { isError, isUndefined, find } = require('lodash')
+const {  find, isError } = require('lodash')
 const axios = require('axios') 
 
 const axed = {
@@ -9,40 +9,27 @@ const axed = {
 //fn for applying options: 
 const options = optionsObj => axed._options = optionsObj
 
-//wrapper for condensed axios post calls + err handling 
-//error assignment triggers re-render in Svelte 
-//(so ur error can be reflected)
-//or return value directly if success    
-const posted = (url, bodyOrError, optionsOrError, error) => 
+//wrapper for condensed axios post calls + some 
+//basic err handling such that the value returned
+//is either successful response data OR the failed response
+const posted = (url, body, options) => 
   new Promise( async r => {
-  //accommodate for params being a body obj, 
-  //Axios options obj, or blank err variable:  
-  if(_.isNull(bodyOrError) || _.isUndefined(bodyOrError)) { 
-    //^ empty var suppplied means its intended for error 
-    body = null
-    options = null 
-    error = null 
+    let res 
+    if(!options) options = axed._options 
+    try { 
+      res = await axios.post(url, body, options)   
+    } catch (err) { res = err } 
+    let error = errorHappened(res) 
+    if(error){
+      log(error)
+      return r(res)
+    }
+    r(res.data)
   }
-  if(_.isObject(optionsOrError)) {
-    //if not supplying a body but setting options then we must set body to null
-    ////ie- posted('string', null, options) 
-    //todo: parse optionts obj for axios properties so 
-    //that we need not supply null body
-    options = optionsOrError 
-  }
-  let options = optionsOrError
-  
-  let res 
-  try { 
-    res = await axios.post( 
-      `${baseURL()}${url}`, body, options
-    )   
-  } catch (err) { res = err } 
-  error = errorHappened(res) 
-  if(error) return r(null) 
-  r(res.data)
-}) 
+) 
 
+//Parse the error and return a string summarizing what happened: 
+//(ie: template ready error string) 
 const errorHappened = axRes => {
   if(!isError(axRes)) return null  //< there was no err 
   let error = 'An error happened'  
@@ -67,7 +54,6 @@ Log the axRes for more verbose info on this AxiosError`
   if(data.code) error = error + ': ' + data.code      
   if(data.error) error = error + ' - ' + data.error
   if(!data.error && data.msg) error = error + ' - ' + data.msg
-  log(error)
   return error
 } 
 
