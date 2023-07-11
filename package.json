@@ -5,11 +5,9 @@
   "main": "lib.js",
   "dependencies": {
     "axios": "^0.27.2",
-    "lodash": "^4.17.21"
-  },
-  "devDependencies": {
+    "lodash": "^4.17.21", 
     "rollup": "^2.78.1",
-    "@rollup/plugin-commonjs": "^22.0.2"
+    "@rollup/plugin-commonjs": "^22.0.2"   
   },
   "module": "dist/lib.mjs",
   "scripts": {
