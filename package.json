@@ -1,6 +1,6 @@
 {
   "name": "axed",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "utility lib for abstracting and handling axios requests and errors with less code",
   "main": "lib.js",
   "dependencies": {

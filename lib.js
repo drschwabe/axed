@@ -28,6 +28,22 @@ const posted = (url, body, options) =>
   }
 ) 
 
+const gotten = (url, body, options) => 
+  new Promise( async r => {
+    let res 
+    if(!options) options = axed._options 
+    try { 
+      res = await axios.get(url, body, options)   
+    } catch (err) { res = err } 
+    let error = errorHappened(res) 
+    if(error){
+      log(error)
+      return r(res)
+    }
+    r(res.data)
+  }
+)   
+
 //Parse the error and return a string summarizing what happened: 
 //(ie: template ready error string) 
 const errorHappened = axRes => {
@@ -58,5 +74,5 @@ Log the axRes for more verbose info on this AxiosError`
 } 
 
 
-module.exports = { options, errorHappened, posted } 
+module.exports = { options, errorHappened, posted, axios, gotten } 
    
