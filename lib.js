@@ -79,5 +79,6 @@ Log the axRes for more verbose info on this AxiosError`
 } 
 
 
-module.exports = { options, errorHappened, posted, axios, gotten } 
+const didErr = errorHappened 
+module.exports = { options, errorHappened, didErr, posted, axios, gotten } 
    
