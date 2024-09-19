@@ -47,8 +47,13 @@ const gotten = (url, body, options) =>
 //Parse the error and return a string summarizing what happened: 
 //(ie: template ready error string) 
 const errorHappened = axRes => {
-  if(!isError(axRes)) return null  //< there was no err 
-  let error = 'An error happened'  
+  let error = true 
+  if(!isError(axRes)) error = false 
+  //extra check for data.error: 
+  if(axRes.data && axRes.data.error) error = true  
+  if(!error) return null  //< there was no err 
+
+  error = 'An error happened'  
   const { response } = axRes
   if(!response) {
     error = error + '; no response was received'  
