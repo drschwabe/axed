@@ -80,5 +80,7 @@ Log the axRes for more verbose info on this AxiosError`
 
 
 const didErr = errorHappened 
-module.exports = { options, errorHappened, didErr, posted, axios, gotten } 
+const got = gotten 
+
+module.exports = { options, errorHappened, didErr, posted, axios, gotten, got } 
    
