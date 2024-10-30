@@ -1,6 +1,6 @@
 {
   "name": "axed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "utility lib for abstracting and handling axios requests and errors with less code",
   "main": "lib.js",
   "dependencies": {
@@ -12,5 +12,12 @@
   "module": "dist/lib.mjs",
   "scripts": {
     "rollup": "npx rollup -c"
-  }
+  }, 
+  "repository" : "https://github.com/drschwabe/axed", 
+  "files" : [
+   "lib.js", 
+   "dist", 
+   "README.md"
+  ]
+
 }
