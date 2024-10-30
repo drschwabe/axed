@@ -24,7 +24,7 @@ if(didErr(res)) throw didErr(res)
 
 If posted (or got) returns null it means the result was blank. 
 
-If didErr returns null it means there was no error, otherwise it returns the error. 
+If didErr returns null it means there was no error, otherwise returns the error. 
 
 
 [axios]:https://github.com/axios/axios
